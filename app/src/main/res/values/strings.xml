@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Housing Application</string>
+    <string name="address_label">Address</string>
+    <string name="description_label">Description</string>
+    <string name="price_label">Price</string>
+    <string name="submit_label">Submit</string>
 </resources>
