@@ -1,7 +1,84 @@
 <resources>
-    <string name="app_name">Housing Application</string>
-    <string name="address_label">Address</string>
-    <string name="description_label">Description</string>
-    <string name="price_label">Price</string>
-    <string name="submit_label">Submit</string>
+    <string name="app_name">HELP</string>
+    <string name="browse_tab">Discover</string>
+    <string name="swiped_list_tab">My List</string>
+    <string name="trending_tab">What\'s Güd</string>
+
+    <string name="Username">Username</string>
+    <string name="Password">Password</string>
+
+    <string name="title_activity_sign_up_confirm">SignUpConfirm</string>
+    <string name="title_activity_mfa">MFAActivity</string>
+    <string name="title_activity_forgot_password">ForgotPasswordActivity</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="title_activity_change_password">ChangePasswordActivity</string>
+    <string name="title_activity_verify">VerifyActivity</string>
+    <string name="title_activity_add_attribute">AddAttributeActivity</string>
+    <string name="title_activity_device_settings">DeviceSettings</string>
+    <string name="title_activity_new_password">NewPassword</string>
+
+    <string name="facebook_id">547694018773328</string>
+    <string name="fb_login_protocol_scheme">fb547694018773328</string>
+
+    <string name="search_button">Refresh</string>
+    <string name="advanced_search">Filter</string>
+    <string name="advanced_search_title">Filter Parameters</string>
+    <string name="settings_button">Settings</string>
+
+    <string name="location_label">Location:</string>
+    <string name="price_label">Max Price:</string>
+    <string name="min_price_label">Min Price:</string>
+    <string name="rating_label">Min Rating:</string>
+    <string name="radius_label">Search Range:</string>
+
+    <string name="four_dollar">$$$$ (Default)</string>
+    <string name="three_dollar">$$$</string>
+    <string name="two_dollar">$$</string>
+    <string name="one_dollar">$</string>
+    <string name="min_one_dollar">$ (Default)</string>
+    <string name="min_four_dollar">$$$$</string>
+
+    <string name="one_star">1 Star (Default)</string>
+    <string name="two_star">2 Stars</string>
+    <string name="three_star">3 Stars</string>
+    <string name="four_star">4 Stars</string>
+    <string name="five_star">5 Stars</string>
+
+    <string name="ten_mile">10 Miles</string>
+    <string name="five_mile">5 Miles (Default)</string>
+    <string name="two_mile">2 Miles</string>
+    <string name="one_mile">1 Mile</string>
+
+    <string name="sort_by_nothing">...</string>
+    <string name="sort_by_name">Business</string>
+    <string name="sort_by_price_lo_hi">Price:Lo-Hi</string>
+    <string name="sort_by_price_hi_lo">Price:Hi-Lo</string>
+    <string name="sort_by_rating">Rating</string>
+    <string name="sort_by_distance">Distance</string>
+
+    <string name="swipe_left">Swipe left</string>
+    <string name="swipe_right">Swipe right</string>
+    <string name="view_swiped_left">%1$s swiped to left!</string>
+    <string name="view_swiped_right">%1$s swiped to right!</string>
+    <string name="dummy_text">Test</string>
+    <string name="dummy_fab">Fab Test</string>
+
+    <string name="reset">Reset stack</string>
+    <string name="stack_reset">Stack reset!</string>
+    <string name="stack_empty">Card stack empty!</string>
+    <string name="swipe_left_no">No</string>
+    <string name="swipe_right_yes">Yes</string>
+    <string name="sort_by">Sort by: </string>
+
+    <string-array name="planets">
+        <item>Sun</item>
+        <item>Mercury</item>
+        <item>Venus</item>
+        <item>Earth</item>
+        <item>Mars</item>
+        <item>Jupiter</item>
+        <item>Saturn</item>
+        <item>Uranus</item>
+        <item>Neptune</item>
+    </string-array>
 </resources>

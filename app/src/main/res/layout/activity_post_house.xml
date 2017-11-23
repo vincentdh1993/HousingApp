@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/address_label"
             android:layout_marginTop="14dp"
-            android:text="@string/address_label"
+            android:text="@strings/address_label"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -44,7 +44,7 @@
             android:layout_alignStart="@+id/address_label"
             android:layout_below="@+id/address_label"
             android:layout_marginTop="33dp"
-            android:text="@string/description_label"
+            android:text="@strings/description_label"
             android:textSize="24sp" />
 
         <EditText
@@ -86,7 +86,7 @@
             android:layout_alignStart="@+id/price_text"
             android:layout_below="@+id/price_text"
             android:layout_marginTop="35dp"
-            android:text="@string/submit_label" />
+            android:text="@strings/submit_label" />
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

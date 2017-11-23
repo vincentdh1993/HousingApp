@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp" >
+    <TextView
+        android:id="@+id/name"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Landlord name" />
+    <TextView
+        android:id="@+id/photo"
+        android:textSize="20sp"
+        android:layout_below="@id/name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="eer" />
+    <TextView
+        android:id="@+id/review"
+        android:textSize="20sp"
+        android:layout_below="@id/photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="*****" />
+
+
+</RelativeLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="priceArray">
+        <item>@string/four_dollar</item>
+        <item>@string/three_dollar</item>
+        <item>@string/two_dollar</item>
+        <item>@string/one_dollar</item>
+    </array>
+
+    <array name="minPriceArray">
+        <item>@string/min_one_dollar</item>
+        <item>@string/two_dollar</item>
+        <item>@string/three_dollar</item>
+        <item>@string/min_four_dollar</item>
+    </array>
+
+    <array name="ratingArray">
+        <item>@string/one_star</item>
+        <item>@string/two_star</item>
+        <item>@string/three_star</item>
+        <item>@string/four_star</item>
+        <item>@string/five_star</item>
+    </array>
+
+    <array name="radiusArray">
+        <item>@string/ten_mile</item>
+        <item>@string/five_mile</item>
+        <item>@string/two_mile</item>
+        <item>@string/one_mile</item>
+    </array>
+
+    <array name="sortByArray">
+        <item>@string/sort_by_nothing</item>
+        <item>@string/sort_by_name</item>
+        <item>@string/sort_by_price_lo_hi</item>
+        <item>@string/sort_by_price_hi_lo</item>
+        <item>@string/sort_by_rating</item>
+        <item>@string/sort_by_distance</item>
+    </array>
+</resources>
