@@ -13,7 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
+//for location searching will change later 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private ListView mListView;
 
