@@ -23,7 +23,8 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SearchFragmentTabs"></activity>
+        <activity android:name=".SearchFragmentTabs"
+            android:windowSoftInputMode="adjustNothing"/>
 
 
         <activity android:name=".PostHouseActivity"></activity>
