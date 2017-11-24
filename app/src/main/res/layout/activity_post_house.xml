@@ -18,7 +18,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignStart="@+id/address_text"
             android:layout_marginTop="14dp"
-            android:text="@strings/address_label"
+            android:text="@string/address_label"
             android:textSize="24sp"
             tools:layout_editor_absoluteX="16dp"
             tools:layout_editor_absoluteY="16dp" />
@@ -44,7 +44,7 @@
             android:layout_alignStart="@+id/address_text"
             android:layout_below="@+id/address_text"
             android:layout_marginTop="33dp"
-            android:text="@strings/description_label"
+            android:text="@string/description_label"
             android:textSize="24sp" />
 
         <EditText
@@ -68,15 +68,6 @@
             android:text="@string/price_label"
             android:textSize="24sp" />
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/price_text"
-            android:layout_below="@+id/price_text"
-            android:layout_marginTop="30dp"
-            android:text="@string/submit_label" />
-
         <EditText
             android:id="@+id/price_text"
             android:layout_width="wrap_content"
@@ -87,17 +78,16 @@
             android:ems="10"
             android:inputType="numberDecimal" />
 
-<<<<<<< HEAD
+
         <Button
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/price_text"
             android:layout_below="@+id/price_text"
-            android:layout_marginTop="35dp"
-            android:text="@strings/submit_label" />
-=======
->>>>>>> 5a7e2978aa87a7348899691c855c034520bfaf87
-    </RelativeLayout>
+            android:layout_marginTop="30dp"
+            android:text="@string/submit_label" />
+
+</RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

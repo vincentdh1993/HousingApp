@@ -25,5 +25,22 @@
         android:layout_height="wrap_content"
         android:text="*****" />
 
+    <TextView
+        android:id="@+id/address"
+        android:textSize="20sp"
+        android:layout_below="@id/review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="address" />
+
+    <TextView
+        android:id="@+id/phone"
+        android:textSize="20sp"
+        android:layout_below="@id/address"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="phone" />
+
+
 
 </RelativeLayout>

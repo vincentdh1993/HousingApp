@@ -22,8 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UserListFragment"></activity>
 
+        <activity android:name=".SearchFragmentTabs"></activity>
 
 
         <activity android:name=".PostHouseActivity"></activity>

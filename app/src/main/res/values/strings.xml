@@ -4,9 +4,14 @@
     <string name="swiped_list_tab">My List</string>
     <string name="trending_tab">What\'s Güd</string>
 
+    <string name="users_tab">Username</string>
+    <string name="address_tab">Username</string>
+
     <string name="Username">Username</string>
     <string name="Password">Password</string>
-
+    <string name="address_label">Address</string>
+    <string name="description_label">Description</string>
+    <string name="submit_label">SUbmit</string>
 
     <string name="search_button">Refresh</string>
     <string name="advanced_search">Filter</string>

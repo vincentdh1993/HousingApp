@@ -15,33 +15,32 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 /**
- * Created by Kevin on 11/19/17.
+ * Created by Kevin on 11/23/17.
  */
 
-public class UserListFragment extends Fragment {
-    ListView listView;
-    View rootView;
-    ArrayList <UserListItem>stringList= new ArrayList();
-    ArrayList <UserListItem>copyData= new ArrayList();
-    UserListAdapter adapter;
+public class AddressFragment extends Fragment {
 
+    private View rootView;
+    ListView listView;
+    ArrayList <AddressListItem>stringList= new ArrayList();
+    ArrayList <AddressListItem>copyData= new ArrayList();
+    AddressListAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup v, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.user_list_fragment, v, false);
-        listView = (ListView) rootView.findViewById(R.id.user_results);
+        rootView = inflater.inflate(R.layout.address_list_fragment, v, false);
+        listView = (ListView) rootView.findViewById(R.id.address_results);
         populateList();
         searchData();
         return rootView;
-
     }
+
     private void populateList() {
         for(int i=0; i<5; i++) {
-            stringList.add(new UserListItem("name "+i));
+            stringList.add(new AddressListItem("name "+i, i*1.0));
         }
         copyData.addAll(stringList);
-        adapter=new UserListAdapter(getContext(), stringList);
-
+        adapter=new AddressListAdapter(getContext(), stringList);
         listView.setAdapter(adapter);
     }
 
@@ -66,24 +65,21 @@ public class UserListFragment extends Fragment {
         });
     }
     public void filter(String charText) {
-        Log.e("filter", "filtering");
+        Log.e("filter", "filterin2g");
         charText = charText.toLowerCase(Locale.getDefault());
         stringList .clear();
         if (charText.length() == 0) {
             stringList.addAll(copyData);
         } else {
-            for (UserListItem wp : copyData) {
-                if (wp.getName().toLowerCase(Locale.getDefault())
-                        .contains(charText)) {
-                    stringList .add(wp);
-
+            for (AddressListItem wp : copyData) {
+                if (wp.getAddress().toLowerCase(Locale.getDefault()).contains(charText)) {
+                    stringList.add(wp);
                 }
             }
-            adapter=new UserListAdapter(getContext(), stringList);
+            adapter=new AddressListAdapter(getContext(), stringList);
             listView.setAdapter(adapter);
             adapter.notifyDataSetChanged();
         }
     }
-
 
 }

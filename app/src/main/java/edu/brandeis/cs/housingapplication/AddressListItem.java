@@ -5,28 +5,37 @@ package edu.brandeis.cs.housingapplication;
  */
 
 public class AddressListItem {
-    private String businessId;
-    private String businessName;
-    private String imageURL;
-    private String price;
-    private Double latitude;
-    private Double longitude;
-    private Double rating;
-    private Boolean open;
+    private String addr;
+    private double price;
+    private double latitude;
+    private double longitude;
+    private double rating;
 
-    public AddressListItem(String name, String imageURL, String price, String id, Double rating, String open, Double longitude, Double latitude){
-        this.businessName = name;
-        this.imageURL = imageURL;
+    public AddressListItem(String addr, Double rating){
+        this.addr = addr;
         this.price = price;
-        this.businessId = id;
         this.rating = rating;
         this.longitude = longitude;
         this.latitude = latitude;
-
-        if(open.equals("true")){
-            this.open = true;
-        } else {
-            this.open = false;
-        }
     }
+
+    public double getPrice() {
+        return this.price;
+    }
+
+    public String getAddress() {
+        return this.addr;
+    }
+
+    public double getLongitutde() {
+        return this.longitude;
+    }
+    public double getLatittude() {
+        return this.latitude;
+    }
+
+    public double getRating() {
+        return this.getRating();
+    }
+
 }

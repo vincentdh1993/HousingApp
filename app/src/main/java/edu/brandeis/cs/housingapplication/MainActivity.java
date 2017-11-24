@@ -1,19 +1,16 @@
 package edu.brandeis.cs.housingapplication;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ListView;
 import android.widget.Toast;
 
-//for location searching will change later 
+//for location searching will change later
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private ListView mListView;
 
@@ -24,19 +21,20 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
-        }
-        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        if (checkLocationPermission()) {
-            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this);
-        }
+//        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//
+//            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION}, 0);
+//        }
+//        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+//        if (checkLocationPermission()) {
+//            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this);
+//        }
         // Intent intent = new Intent(this, UserListFragment.class);
         // this.startActivity(intent);
         //        Button for starting the PostHouseActivity
         //        startActivity(new Intent(this, PostHouseActivity.class));
+        startActivity(new Intent(this, SearchFragmentTabs.class));
 
 
     }

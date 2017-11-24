@@ -8,16 +8,23 @@ public class UserListItem {
     private String name;
     private String review;
     private String image;
+    private String address;
+    private String phone;
+
 
     public UserListItem(String name) {
         this.name=name;
-        this.review="***";
-        this.image="LOL";
     }
 
 
     protected String getName() {
         return name;
+    }
+    protected  String getAddress() {
+        return this.address;
+    }
+    protected  String getPhone() {
+        return this.address;
     }
 
 
