@@ -11,7 +11,7 @@
     <string name="Password">Password</string>
     <string name="address_label">Address</string>
     <string name="description_label">Description</string>
-    <string name="submit_label">SUbmit</string>
+    <string name="submit_label">Submit</string>
 
     <string name="search_button">Refresh</string>
     <string name="advanced_search">Filter</string>
@@ -48,5 +48,9 @@
     <string name="sort_by_price_hi_lo">Price:Hi-Lo</string>
     <string name="sort_by_rating">Rating</string>
     <string name="sort_by_distance">Distance</string>
+
+    <string name="rate_button">Rate</string>
+    <string name="contact_button">Contact</string>
+    <string name="reviews">Reviews</string>
 
 </resources>
