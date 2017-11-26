@@ -47,10 +47,12 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //        if (checkLocationPermission()) {
 //            locManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 10000, 1, this);
 //        }
+
         // Intent intent = new Intent(this, UserListFragment.class);
         // this.startActivity(intent);
         //        Button for starting the PostHouseActivity
         //        startActivity(new Intent(this, PostHouseActivity.class));
+
         startActivity(new Intent(this, SearchFragmentTabs.class));
 
 

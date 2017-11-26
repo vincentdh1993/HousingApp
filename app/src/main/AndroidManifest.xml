@@ -3,7 +3,7 @@
     package="edu.brandeis.cs.housingapplication">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
 
     <application
@@ -28,6 +28,8 @@
 
 
         <activity android:name=".PostHouseActivity"></activity>
+
+        <activity android:name=".DisplayHouseActivity"></activity>
     </application>
 
 </manifest>
