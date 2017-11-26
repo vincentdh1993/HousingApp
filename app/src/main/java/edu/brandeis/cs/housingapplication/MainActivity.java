@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                 return true;
         }});
 
-
 //        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 //

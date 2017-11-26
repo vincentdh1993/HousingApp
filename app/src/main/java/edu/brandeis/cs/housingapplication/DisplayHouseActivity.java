@@ -1,6 +1,7 @@
 package edu.brandeis.cs.housingapplication;
 
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,10 +10,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.marvinlabs.widget.slideshow.SlideShowAdapter;
 import com.marvinlabs.widget.slideshow.SlideShowView;
 import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
 
 import java.io.InputStream;
+import java.util.Arrays;
 
 /**
  * Created by eureyuri on 2017/11/26.
@@ -28,6 +31,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
         Log.w("DisplayHouse", "Before set");
 
         extractAndSet();
+        startSlideShow();
 
         Log.w("DisplayHouse", "After set");
 
@@ -56,13 +60,6 @@ public class DisplayHouseActivity extends AppCompatActivity {
         TextView houseName = (TextView)findViewById(R.id.houseName);
         houseName.setText("New house name");
 
-//        Get pictures from db
-        SlideShowView slideShow = (SlideShowView)findViewById(R.id.slideshow);
-        this.getResources().getIdentifier("1", "raw", this.getPackageName());
-        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(this,
-                new int[]{this.getResources().getIdentifier("slide1", "raw", this.getPackageName()),
-                        this.getResources().getIdentifier("slide2", "raw", this.getPackageName())});
-
 //        Get rating from db
         TextView rating = (TextView)findViewById(R.id.houseRating);
         rating.setText("☆☆☆");
@@ -71,7 +68,23 @@ public class DisplayHouseActivity extends AppCompatActivity {
         TextView address = (TextView)findViewById(R.id.address_display_text);
         address.setText("1234");
 
+    }
 
+    private void startSlideShow() {
+        //        Get pictures from db
+        SlideShowView slideShowView = (SlideShowView)findViewById(R.id.slideshow);
+        slideShowView.setAdapter(createAdapter());
 
+        slideShowView.play();
+
+    }
+
+    private SlideShowAdapter createAdapter() {
+        int[] slideResource = new int[]{R.raw.slide1, R.raw.slide2};
+        BitmapFactory.Options opt = new BitmapFactory.Options();
+        opt.inSampleSize = 2;
+        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(this, slideResource, opt);
+
+        return adapter;
     }
 }
