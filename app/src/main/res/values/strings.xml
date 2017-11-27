@@ -53,4 +53,8 @@
     <string name="contact_button">Contact</string>
     <string name="reviews">Reviews</string>
 
+    <string name="review_name">Name</string>
+    <string name="review_rate">Rating</string>
+    <string name="review_comment">Comment</string>
+
 </resources>

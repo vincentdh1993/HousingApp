@@ -5,18 +5,13 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
-
-import com.marvinlabs.widget.slideshow.SlideShowAdapter;
-import com.marvinlabs.widget.slideshow.SlideShowView;
-import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
-
-import java.io.InputStream;
-import java.util.Arrays;
 
 /**
  * Created by eureyuri on 2017/11/26.
@@ -29,12 +24,9 @@ public class DisplayHouseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_house);
 
-        Log.w("DisplayHouse", "Before set");
-
         extractAndSet();
-        startSlideShow();
+//        startSlideShow();
 
-        Log.w("DisplayHouse", "After set");
 
         Button rateButton = (Button)findViewById(R.id.rateButton);
 
@@ -51,11 +43,15 @@ public class DisplayHouseActivity extends AppCompatActivity {
         contactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Get number from db?
                 String phoneNumber = "123-456-789";
                 startActivity(new Intent(Intent.ACTION_DIAL,
                         Uri.fromParts("tel", phoneNumber, null)));
             }
         });
+
+//        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
+//        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
     }
 
     @Override
@@ -88,21 +84,14 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
     }
 
-    private void startSlideShow() {
-        //        Get pictures from db
-        SlideShowView slideShowView = (SlideShowView)findViewById(R.id.slideshow);
-        slideShowView.setAdapter(createAdapter());
-
-        slideShowView.play();
-
-    }
-
-    private SlideShowAdapter createAdapter() {
-        int[] slideResource = new int[]{R.raw.slide1, R.raw.slide2};
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inSampleSize = 2;
-        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(this, slideResource, opt);
-
-        return adapter;
-    }
+//    private void startSlideShow() {
+//        //        Get pictures from db
+//
+//        Log.w("startSlide", "Before adapter");
+//        CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
+//        ViewPager viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
+//        viewPager.setAdapter(adapter);
+//        Log.w("startSlide", "After set adapter");
+//
+//    }
 }
