@@ -26,6 +26,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
         extractAndSet();
 //        startSlideShow();
 
+
         Button rateButton = (Button)findViewById(R.id.rateButton);
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,13 +39,14 @@ public class DisplayHouseActivity extends AppCompatActivity {
         contactButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                Get number from db?
                 String phoneNumber = "123-456-789";
                 startActivity(new Intent(Intent.ACTION_DIAL,
                         Uri.fromParts("tel", phoneNumber, null)));
             }
         });
 
-        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
+//        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
 //        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
     }
 
@@ -64,15 +66,14 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
     }
 
-    private void startSlideShow() {
-        //        Get pictures from db
-
-        Log.w("startSlide", "Before adapter");
-        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
-        ViewPager viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
-        Log.w("startSlide", "Before set adapter");
-        viewPager.setAdapter(adapter);
-        Log.w("startSlide", "After set adapter");
-
-    }
+//    private void startSlideShow() {
+//        //        Get pictures from db
+//
+//        Log.w("startSlide", "Before adapter");
+//        CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
+//        ViewPager viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
+//        viewPager.setAdapter(adapter);
+//        Log.w("startSlide", "After set adapter");
+//
+//    }
 }
