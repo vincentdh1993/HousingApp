@@ -4,10 +4,12 @@ import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.marvinlabs.widget.slideshow.SlideShowAdapter;
@@ -28,12 +30,8 @@ public class DisplayHouseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_house);
 
-        Log.w("DisplayHouse", "Before set");
-
         extractAndSet();
-        startSlideShow();
-
-        Log.w("DisplayHouse", "After set");
+//        startSlideShow();
 
         Button rateButton = (Button)findViewById(R.id.rateButton);
         rateButton.setOnClickListener(new View.OnClickListener() {
@@ -52,6 +50,9 @@ public class DisplayHouseActivity extends AppCompatActivity {
                         Uri.fromParts("tel", phoneNumber, null)));
             }
         });
+
+        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
+//        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
     }
 
 //    TODO: extract info from db and set
@@ -72,19 +73,13 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
     private void startSlideShow() {
         //        Get pictures from db
-        SlideShowView slideShowView = (SlideShowView)findViewById(R.id.slideshow);
-        slideShowView.setAdapter(createAdapter());
 
-        slideShowView.play();
+        Log.w("startSlide", "Before adapter");
+        CustomPagerAdapter adapter = new CustomPagerAdapter(this);
+        ViewPager viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
+        Log.w("startSlide", "Before set adapter");
+        viewPager.setAdapter(adapter);
+        Log.w("startSlide", "After set adapter");
 
-    }
-
-    private SlideShowAdapter createAdapter() {
-        int[] slideResource = new int[]{R.raw.slide1, R.raw.slide2};
-        BitmapFactory.Options opt = new BitmapFactory.Options();
-        opt.inSampleSize = 2;
-        ResourceBitmapAdapter adapter = new ResourceBitmapAdapter(this, slideResource, opt);
-
-        return adapter;
     }
 }

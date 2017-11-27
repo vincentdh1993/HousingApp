@@ -52,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         //        Button for starting the PostHouseActivity
         //        startActivity(new Intent(this, PostHouseActivity.class));
 
-        startActivity(new Intent(this, SearchFragmentTabs.class));
+//        startActivity(new Intent(this, SearchFragmentTabs.class));
 
 //        startActivity(new Intent(this, PostHouseActivity.class));
-//        startActivity(new Intent(this, DisplayHouseActivity.class));
+        startActivity(new Intent(this, DisplayHouseActivity.class));
 
 
     }
