@@ -33,6 +33,8 @@
         <activity android:name=".DisplayHouseActivity"></activity>
 
         <activity android:name=".RateHouseActivity"></activity>
+
+        <activity android:name=".HomeActivity"></activity>
     </application>
 
 </manifest>
