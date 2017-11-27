@@ -31,6 +31,8 @@
         <activity android:name=".PostHouseActivity"></activity>
 
         <activity android:name=".DisplayHouseActivity"></activity>
+
+        <activity android:name=".RateHouseActivity"></activity>
     </application>
 
 </manifest>
