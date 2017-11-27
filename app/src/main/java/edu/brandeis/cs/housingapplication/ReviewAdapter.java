@@ -22,7 +22,7 @@ public class ReviewAdapter extends BaseAdapter {
         reviewEntryDatas = new ArrayList<ReviewEntryData>();
         appContext = context;
 
-        for (ReviewEntryData data : dbOpenHelper.getExpenses()) {
+        for (ReviewEntryData data : dbOpenHelper.getReviews()) {
             reviewEntryDatas.add(data);
         }
     }
@@ -55,16 +55,16 @@ public class ReviewAdapter extends BaseAdapter {
         final ReviewEntryData reviewData = reviewEntryDatas.get(index);
 
         if (view == null) {
-            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.expense_entry, parent, false);
+            view = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_entry, parent, false);
         }
 
-        TextView name = view.findViewById(R.id.descriptionEntry);
+        TextView name = (TextView)view.findViewById(R.id.review_name);
         name.setText(reviewData.getName());
 
-        TextView rate = view.findViewById(R.id.notesEntry);
+        TextView rate = (TextView)view.findViewById(R.id.review_rate);
         rate.setText(reviewData.getRate());
 
-        TextView comment = view.findViewById(R.id.timeEntry);
+        TextView comment = (TextView)view.findViewById(R.id.review_comment);
         comment.setText(reviewData.getComment());
 
         return view;

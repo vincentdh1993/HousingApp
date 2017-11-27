@@ -12,13 +12,6 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.marvinlabs.widget.slideshow.SlideShowAdapter;
-import com.marvinlabs.widget.slideshow.SlideShowView;
-import com.marvinlabs.widget.slideshow.adapter.ResourceBitmapAdapter;
-
-import java.io.InputStream;
-import java.util.Arrays;
-
 /**
  * Created by eureyuri on 2017/11/26.
  */

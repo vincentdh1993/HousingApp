@@ -1,8 +1,6 @@
 package edu.brandeis.cs.housingapplication;
 
 import android.content.Context;
-import android.database.DataSetObserver;
-import android.os.Parcelable;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
