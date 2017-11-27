@@ -1,5 +1,6 @@
 package edu.brandeis.cs.housingapplication;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,10 +29,13 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
 
         Button rateButton = (Button)findViewById(R.id.rateButton);
+
+        // Added by Moses on Sunday 11/26/17
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent());
+                Intent i = new Intent(getApplicationContext(), RateHouseActivity.class);
+                startActivityForResult(i, 1);
             }
         });
 
@@ -50,6 +54,20 @@ public class DisplayHouseActivity extends AppCompatActivity {
 //        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if(resultCode == Activity.RESULT_OK){
+                String rating=data.getStringExtra("rating");
+                String comment=data.getStringExtra("comment");
+                // Now we have the comment and rating in String form
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code for a canceled rating
+            }
+        }
+    }//onActivityResult
 //    TODO: extract info from db and set
     private void extractAndSet() {
 //        Get house name from db

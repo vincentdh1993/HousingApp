@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/ratingText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="46dp"
+        android:layout_marginTop="32dp"
+        android:text="Rating"
+        android:textSize="24sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ratingText"
+        android:layout_below="@+id/ratingText"
+        android:layout_marginTop="21dp" />
+
+    <TextView
+        android:id="@+id/commentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/ratingBar"
+        android:layout_below="@+id/ratingBar"
+        android:layout_marginTop="21dp"
+        android:text="Comments"
+        android:textSize="24sp"/>
+
+    <EditText
+        android:id="@+id/commentEdit"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_alignStart="@+id/commentText"
+        android:layout_below="@+id/commentText"
+        android:inputType="textMultiLine"
+        android:layout_marginTop="21dp"/>
+
+    <Button
+        android:id="@+id/submitRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/commentText"
+        android:layout_alignBottom="@+id/commentText"
+        android:layout_marginEnd="15dp"
+        android:layout_toStartOf="@+id/cancelRating"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/cancelRating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/commentText"
+        android:layout_alignBottom="@+id/commentText"
+        android:layout_toEndOf="@+id/ratingBar"
+        android:text="Cancel" />
+
+
+
+</RelativeLayout>
