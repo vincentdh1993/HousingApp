@@ -57,4 +57,6 @@
     <string name="review_rate">Rating</string>
     <string name="review_comment">Comment</string>
 
+    <string name="cancel_button">Cancel</string>
+
 </resources>

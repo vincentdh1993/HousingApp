@@ -1,5 +1,6 @@
 package edu.brandeis.cs.housingapplication;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,11 +14,11 @@ public class HomeActivity extends AppCompatActivity {
     private boolean flagmale = false;
     private boolean flagfemale = false;
 
-    RadioButton House;
+    RadioButton house;
     RadioButton landLord;
     EditText searching;
-    Button Search;
-    Button Post;
+    Button search;
+    Button post;
 
 
     @Override
@@ -26,25 +27,25 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
 
-        House = (RadioButton)findViewById(R.id.radioButton3);
+        house = (RadioButton)findViewById(R.id.radioButton3);
         landLord = (RadioButton) findViewById(R.id.radioButton4);
         searching = (EditText) findViewById(R.id.editText4);
-        Search = (Button) findViewById(R.id.button3);
-        Post = (Button) findViewById(R.id.button4);
+        search = (Button) findViewById(R.id.button3);
+        post = (Button) findViewById(R.id.button4);
 
 
-        House.setOnClickListener(new View.OnClickListener() {
+        house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (House.isChecked()) {
+                if (house.isChecked()) {
                     if (!flagmale) {
-                        House.setChecked(true);
+                        house.setChecked(true);
                         landLord.setChecked(false);
                         flagmale = true;
                         flagfemale = false;
                     } else {
                         flagmale = false;
-                        House.setChecked(false);
+                        house.setChecked(false);
                         landLord.setChecked(false);
                     }
                 }
@@ -57,19 +58,19 @@ public class HomeActivity extends AppCompatActivity {
                 if (landLord.isChecked()) {
                     if (!flagfemale) {
                         landLord.setChecked(true);
-                        House.setChecked(false);
+                        house.setChecked(false);
                         flagfemale = true;
                         flagmale = false;
                     } else {
                         flagfemale = false;
                         landLord.setChecked(false);
-                        House.setChecked(false);
+                        house.setChecked(false);
                     }
                 }
             }
         });
 
-        Search.setOnClickListener(new View.OnClickListener() {
+        search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String temp = "";
@@ -87,16 +88,12 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        Post.setOnClickListener(new View.OnClickListener() {
+        post.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(HomeActivity.this, "Posting", Toast.LENGTH_SHORT).show();
-                //Move to posting page
+                startActivity(new Intent(HomeActivity.this, PostHouseActivity.class));
             }
         });
-
-
-
 
     }
 
