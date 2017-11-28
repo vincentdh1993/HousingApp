@@ -26,6 +26,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.help_logo);
 
         house = (RadioButton)findViewById(R.id.radioButton3);
         landLord = (RadioButton) findViewById(R.id.radioButton4);

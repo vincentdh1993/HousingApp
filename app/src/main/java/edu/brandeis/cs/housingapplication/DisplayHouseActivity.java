@@ -32,9 +32,11 @@ public class DisplayHouseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_house);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.help_logo);
+
         extractAndSet();
         startSlideShow();
-
 
         Button rateButton = (Button)findViewById(R.id.rateButton);
 
