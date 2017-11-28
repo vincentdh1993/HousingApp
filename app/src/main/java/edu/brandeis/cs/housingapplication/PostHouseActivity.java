@@ -35,5 +35,13 @@ public class PostHouseActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+        Button cancelButton = (Button)findViewById(R.id.cancel_button);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

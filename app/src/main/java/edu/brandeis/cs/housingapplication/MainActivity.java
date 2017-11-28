@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
 //        startActivity(new Intent(this, SearchFragmentTabs.class));
 
-//        startActivity(new Intent(this, PostHouseActivity.class));
 //        startActivity(new Intent(this, DisplayHouseActivity.class));
 
         startActivity(new Intent(this, HomeActivity.class));
