@@ -57,24 +57,25 @@ public class DisplayHouseActivity extends AppCompatActivity {
             }
         });
 
-//        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
+        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
+        reviewList.setAdapter(new ReviewAdapter());
 //        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-
         if (requestCode == 1) {
             if(resultCode == Activity.RESULT_OK){
-                String rating=data.getStringExtra("rating");
-                String comment=data.getStringExtra("comment");
+                String rating = data.getStringExtra("rating");
+                String comment = data.getStringExtra("comment");
                 // Now we have the comment and rating in String form
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code for a canceled rating
             }
         }
-    }//onActivityResult
+    }
+
 //    TODO: extract info from db and set
     private void extractAndSet() {
 //        Get house name from db
