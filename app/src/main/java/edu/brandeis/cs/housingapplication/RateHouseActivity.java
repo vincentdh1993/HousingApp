@@ -26,6 +26,9 @@ public class RateHouseActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_house);
 
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.drawable.help_logo);
+
         // Initialize things
         ratingBar = (RatingBar)findViewById(R.id.ratingBar);
         comment = (EditText)findViewById(R.id.commentEdit);
