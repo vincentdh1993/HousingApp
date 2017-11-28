@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,15 +33,15 @@ public class UserListAdapter extends ArrayAdapter <UserListItem> {
         view = vi.inflate(R.layout.user_item, null);
         UserListItem p = getItem(position);
         TextView name=(TextView) view.findViewById(R.id.name);
-        TextView photo=(TextView) view.findViewById(R.id.photo);
-        TextView review=(TextView) view.findViewById(R.id.review);
+        TextView phone=(TextView) view.findViewById(R.id.phone);
+        RatingBar review=(RatingBar) view.findViewById(R.id.ratingBar);
         TextView adddress=(TextView) view.findViewById(R.id.address);
-        TextView phone=(TextView) view.findViewById(R.id.photo);
+        ImageView img=(ImageView)view.findViewById(R.id.user_profile_img);
         name.setText(user.getName());
-        photo.setText(user.getImage());
-        review.setText(user.getReview());
+        review.setRating((float)user.getReview());
         adddress.setText("address");
         phone.setText("text");
+        img.setImageResource(R.drawable.user);
         return view;
     }
 

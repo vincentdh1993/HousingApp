@@ -6,7 +6,7 @@ package edu.brandeis.cs.housingapplication;
 
 public class UserListItem {
     private String name;
-    private String review;
+    private double review;
     private String image;
     private String address;
     private String phone;
@@ -28,7 +28,7 @@ public class UserListItem {
     }
 
 
-    protected String getReview() {
+    protected double getReview() {
         return review;
     }
     protected String getImage() {
@@ -41,7 +41,7 @@ public class UserListItem {
     protected void setImage(String image) {
         this.image=image;
     }
-    protected  void setReview(String review) {
+    protected  void setReview(double review) {
         this.review=review;
     }
 

@@ -1,46 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
+
     <TextView
         android:id="@+id/address"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Address name" />
+        android:layout_alignEnd="@+id/ratingBar"
+        android:layout_alignStart="@+id/price"
+        android:text="Address name"
+        android:textSize="20sp" />
+
     <TextView
         android:id="@+id/price"
-        android:textSize="20sp"
-        android:layout_below="@id/address"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/ratingBar"
+        android:layout_below="@+id/address"
+        android:layout_toEndOf="@+id/house_img"
         android:text="Price"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/review"
-        android:textSize="20sp"
-        android:layout_below="@id/price"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="review" />
-
-    <TextView
-        android:id="@+id/longtitude"
-        android:textSize="20sp"
-        android:layout_below="@id/review"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="longitude" />
-
-    <TextView
-        android:id="@+id/latitude"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/longtitude"
-        android:text="latitude"
         android:textSize="20sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignBottom="@+id/house_img"
+        android:layout_below="@+id/price"
+        android:layout_toEndOf="@+id/house_img"
+        android:numStars="5"
+        android:rating="2.0"
+        android:stepSize="1.0" />
+
+    <ImageView
+        android:id="@+id/house_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        app:srcCompat="@drawable/home" />
 
 </RelativeLayout>

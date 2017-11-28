@@ -16,6 +16,7 @@ import android.widget.Toast;
 //for location searching will change later
 public class MainActivity extends AppCompatActivity implements LocationListener {
     private ListView mListView;
+    BottomNavigationView bottomNavigationView;
 
     private MyLocationService loc;
     protected LocationManager locManager;
@@ -24,18 +25,24 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                         switch (item.getItemId()) {
                             case R.id.search_bottom:
+                                startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
 
                             case R.id.account_bottom:
+                                startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
                         }
-                return true;
-        }});
+                        return true;
+                    }});
 
 //        locManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 //        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -55,12 +62,14 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //        startActivity(new Intent(this, SearchFragmentTabs.class));
 
 //        startActivity(new Intent(this, PostHouseActivity.class));
-        startActivity(new Intent(this, DisplayHouseActivity.class));
+//        startActivity(new Intent(this, DisplayHouseActivity.class));
 
 //        startActivity(new Intent(this, HomeActivity.class));
 
 
     }
+
+
 
     public boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";

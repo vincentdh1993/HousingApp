@@ -4,42 +4,52 @@
     android:layout_height="match_parent"
     android:paddingLeft="16dp"
     android:paddingRight="16dp" >
+
+    <ImageView
+        android:id="@+id/user_profile_img"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/name" />
+
     <TextView
         android:id="@+id/name"
-        android:textSize="20sp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Landlord name" />
-    <TextView
-        android:id="@+id/photo"
-        android:textSize="20sp"
-        android:layout_below="@id/name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="eer" />
-    <TextView
-        android:id="@+id/review"
-        android:textSize="20sp"
-        android:layout_below="@id/photo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="*****" />
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/address"
+        android:text="Landlord name"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/address"
-        android:textSize="20sp"
-        android:layout_below="@id/review"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="address" />
+        android:layout_below="@+id/name"
+        android:layout_toEndOf="@+id/user_profile_img"
+        android:text="address"
+        android:textSize="20sp" />
+
+    <RatingBar
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignStart="@+id/phone"
+        android:layout_below="@+id/phone"
+        android:numStars="5"
+        android:rating="2.0"
+        android:stepSize="1.0" />
 
     <TextView
         android:id="@+id/phone"
-        android:textSize="20sp"
-        android:layout_below="@id/address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="phone" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/address"
+        android:layout_marginStart="106dp"
+        android:text="phone"
+        android:textSize="20sp" />
 
 
 

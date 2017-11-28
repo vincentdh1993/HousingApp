@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -22,6 +24,7 @@ public class AddressListAdapter extends ArrayAdapter<AddressListItem> {
 
     public AddressListAdapter(Context context, List items) {
         super(context, android.R.layout.simple_list_item_1, items);
+        this.users=users;
     }
 
 
@@ -33,14 +36,12 @@ public class AddressListAdapter extends ArrayAdapter<AddressListItem> {
         View view = vi.inflate(R.layout.address_item, null);
         TextView name=(TextView) view.findViewById(R.id.address);
         TextView price=(TextView) view.findViewById(R.id.price);
-        TextView review=(TextView) view.findViewById(R.id.review);
-        TextView longitude=(TextView) view.findViewById(R.id.longtitude);
-        TextView lattitude=(TextView) view.findViewById(R.id.latitude);
+        RatingBar review=(RatingBar) view.findViewById(R.id.ratingBar);
+        ImageView img=(ImageView)view.findViewById(R.id.house_img);
         name.setText(addr.getAddress());
         price.setText(addr.getPrice()+"");
-        review.setText(5+"");
-        longitude.setText("LONG");
-        lattitude.setText("LAT");
+        review.setRating(3);
+        img.setImageResource(R.drawable.home);
         return view;
 
     }
