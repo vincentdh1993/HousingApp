@@ -65,10 +65,13 @@ public class DisplayHouseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == 1) {
-            if(resultCode == Activity.RESULT_OK){
+            if (resultCode == Activity.RESULT_OK){
                 String rating = data.getStringExtra("rating");
                 String comment = data.getStringExtra("comment");
-                // Now we have the comment and rating in String form
+                ListView listView = (ListView)findViewById(R.id.reviews_list);
+                ReviewAdapter adapter = (ReviewAdapter)listView.getAdapter();
+                adapter.add(new ReviewData(100, "New review", rating, comment));
+                adapter.notifyDataSetChanged();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
                 //Write your code for a canceled rating
