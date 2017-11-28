@@ -26,7 +26,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.help_logo);
 
@@ -67,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 //        startActivity(new Intent(this, SearchFragmentTabs.class));
 
 //        startActivity(new Intent(this, PostHouseActivity.class));
-//        startActivity(new Intent(this, DisplayHouseActivity.class));
+        startActivity(new Intent(this, DisplayHouseActivity.class));
 
 //        startActivity(new Intent(this, HomeActivity.class));
 
