@@ -13,7 +13,8 @@ import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
 
-public class ViewPagerAdapter extends PagerAdapter{
+public class ViewPagerAdapter extends PagerAdapter {
+
     Activity activity;
     String[] images;
     LayoutInflater inflater;
@@ -39,21 +40,21 @@ public class ViewPagerAdapter extends PagerAdapter{
         View itemView = inflater.inflate(R.layout.viewpager_item,container,false);
 
         ImageView image = (ImageView)itemView.findViewById(R.id.imageSlideshow);
-        DisplayMetrics dis = new DisplayMetrics();
-        activity.getWindowManager().getDefaultDisplay().getMetrics(dis);
-        int height = dis.heightPixels;
-        int width = dis.widthPixels;
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int height = displayMetrics.heightPixels;
+        int width = displayMetrics.widthPixels;
         image.setMinimumHeight(height);
         image.setMinimumWidth(width);
 
-        try{
+        try {
             Picasso.with(activity.getApplicationContext())
                     .load(images[position])
-                    .placeholder(R.mipmap.ic_launcher)
-                    .error(R.mipmap.ic_launcher)
+                    .placeholder(R.mipmap.help_logo)
+                    .error(R.mipmap.help_logo)
                     .into(image);
         }
-        catch (Exception ex){
+        catch (Exception ex) {
             Log.w("ViewPagerAdapter", "Exception: " + ex.getMessage());
         }
 
