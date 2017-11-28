@@ -12,9 +12,6 @@ import android.support.v4.view.ViewPager;
 
 public class SearchFragmentTabs extends FragmentActivity {
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

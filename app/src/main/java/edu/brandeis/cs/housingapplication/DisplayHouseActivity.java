@@ -19,18 +19,25 @@ import android.widget.TextView;
 
 public class DisplayHouseActivity extends AppCompatActivity {
 
+    ViewPager viewPager;
+    ViewPagerAdapter adapter;
+
+    private String[] images = {
+            "https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg",
+            "https://static.pexels.com/photos/106399/pexels-photo-106399.jpeg"
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_house);
 
         extractAndSet();
-//        startSlideShow();
+        startSlideShow();
 
 
         Button rateButton = (Button)findViewById(R.id.rateButton);
 
-        // Added by Moses on Sunday 11/26/17
         rateButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -84,14 +91,11 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
     }
 
-//    private void startSlideShow() {
-//        //        Get pictures from db
-//
-//        Log.w("startSlide", "Before adapter");
-//        CustomPagerAdapter adapter = new CustomPagerAdapter(getSupportFragmentManager());
-//        ViewPager viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
-//        viewPager.setAdapter(adapter);
-//        Log.w("startSlide", "After set adapter");
-//
-//    }
+    private void startSlideShow() {
+        //        Get pictures from db
+        viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
+        adapter = new ViewPagerAdapter(DisplayHouseActivity.this, images);
+        viewPager.setAdapter(adapter);
+
+    }
 }
