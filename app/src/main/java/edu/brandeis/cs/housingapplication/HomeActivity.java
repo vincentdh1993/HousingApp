@@ -39,7 +39,6 @@ public class HomeActivity extends AppCompatActivity {
         search = (Button) findViewById(R.id.button3);
         post = (Button) findViewById(R.id.button4);
 
-
         house.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

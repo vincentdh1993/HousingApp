@@ -5,14 +5,19 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.ListView;
+
+import edu.brandeis.cs.housingapplication.login.SessionService;
 
 //for location searching will change later
 public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     BottomNavigationView bottomNavigationView;
 
+
+    private SessionService sessionService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +69,13 @@ public class MainActivity extends AppCompatActivity {
 
 //        startActivity(new Intent(this, DisplayHouseActivity.class));
 
-        startActivity(new Intent(this, HomeActivity.class));
+
+        sessionService = new SessionService(this);
+        if (sessionService.isSomeoneLoggedIn()) {
+            startActivity(new Intent(this, HomeActivity.class));
+        } else {
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 
     }
 
