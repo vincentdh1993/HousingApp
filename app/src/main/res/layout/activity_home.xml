@@ -79,6 +79,8 @@
         android:layout_toStartOf="@+id/button3"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="House or Land Lord"
+        android:hint="House or Land Lord"
         android:textColor="@android:color/darker_gray" />
+    <include layout="@layout/bottom_navigation"/>
+
 </RelativeLayout>

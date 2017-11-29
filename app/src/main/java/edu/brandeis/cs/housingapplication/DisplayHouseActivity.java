@@ -2,12 +2,13 @@ package edu.brandeis.cs.housingapplication;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
@@ -21,6 +22,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
 
     ViewPager viewPager;
     ViewPagerAdapter adapter;
+    BottomNavigationView bottomNavigationView;
 
     private String[] images = {
             "https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg",
@@ -62,6 +64,30 @@ public class DisplayHouseActivity extends AppCompatActivity {
         ListView reviewList = (ListView)findViewById(R.id.reviews_list);
         reviewList.setAdapter(new ReviewAdapter());
 //        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search_bottom:
+                                startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
+
+                            case R.id.account_bottom:
+                                //   startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
+                            case R.id.home_bottom:
+                                startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                                overridePendingTransition(0, 0);
+                                break;
+                        }
+                        return true;
+                    }});
+
     }
 
     @Override

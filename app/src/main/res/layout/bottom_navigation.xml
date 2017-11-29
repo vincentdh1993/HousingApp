@@ -16,7 +16,5 @@
         app:itemTextColor="@drawable/myselector"
         android:background="?android:attr/windowBackground"
         app:layout_scrollFlags="scroll|enterAlways|snap"
-        android:isScrollContainer="false"
-
         app:menu="@menu/bottom_nav" />
 </RelativeLayout>

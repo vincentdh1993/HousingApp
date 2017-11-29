@@ -100,5 +100,7 @@
             android:text="@string/cancel_button" />
 
     </RelativeLayout>
+    <include layout="@layout/bottom_navigation"/>
+
 
 </android.support.constraint.ConstraintLayout>

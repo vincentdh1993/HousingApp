@@ -1,25 +1,18 @@
 package edu.brandeis.cs.housingapplication;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.ListView;
-import android.widget.Toast;
 
 //for location searching will change later
-public class MainActivity extends AppCompatActivity implements LocationListener {
+public class MainActivity extends AppCompatActivity {
     private ListView mListView;
     BottomNavigationView bottomNavigationView;
 
-    private MyLocationService loc;
-    protected LocationManager locManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.help_logo);
 
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
                     @Override
@@ -41,7 +34,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
                                 break;
 
                             case R.id.account_bottom:
-                                startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                             //   startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
+                            case R.id.home_bottom:
+                                  startActivity(new Intent(getBaseContext(), HomeActivity.class));
                                 overridePendingTransition(0, 0);
                                 break;
                         }
@@ -73,44 +70,6 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
 
 
-    public boolean checkLocationPermission() {
-        String permission = "android.permission.ACCESS_FINE_LOCATION";
-        int res = this.checkCallingOrSelfPermission(permission);
-        return (res == PackageManager.PERMISSION_GRANTED);
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 0: {
-                if (grantResults.length > 0  && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(getApplicationContext(), "Permission granted", Toast.LENGTH_SHORT).show();
-                } else {
-                    Toast.makeText(getApplicationContext(), "Permission denied", Toast.LENGTH_SHORT).show();
-                }
-                return;
-            }
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-
-    }
-
-    @Override
-    public void onStatusChanged(String provider, int status, Bundle extras) {
-
-    }
-
-    @Override
-    public void onProviderEnabled(String provider) {
-
-    }
-
-    @Override
-    public void onProviderDisabled(String provider) {
-
-    }
 
 }

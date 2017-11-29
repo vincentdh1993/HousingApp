@@ -59,6 +59,7 @@
         android:layout_alignBottom="@+id/commentText"
         android:layout_toEndOf="@+id/ratingBar"
         android:text="Cancel" />
+    <include layout="@layout/bottom_navigation"/>
 
 
 

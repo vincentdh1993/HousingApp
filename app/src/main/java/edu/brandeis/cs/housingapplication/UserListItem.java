@@ -10,6 +10,8 @@ public class UserListItem {
     private String image;
     private String address;
     private String phone;
+    private String img;
+
 
 
     public UserListItem(String name) {
@@ -26,7 +28,12 @@ public class UserListItem {
     protected  String getPhone() {
         return this.address;
     }
-
+    public String getImgURL() {
+        return this.img;
+    }
+    public void setImg(String img) {
+        this.img=img;
+    }
 
     protected double getReview() {
         return review;

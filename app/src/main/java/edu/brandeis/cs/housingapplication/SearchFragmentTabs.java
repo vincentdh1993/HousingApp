@@ -1,10 +1,14 @@
 
 package edu.brandeis.cs.housingapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.MenuItem;
 
 /**
  * Created by Kevin on 11/23/17.
@@ -15,6 +19,7 @@ public class SearchFragmentTabs extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.search_tabs);
         TabLayout tabLayout=setTags();
 
@@ -40,6 +45,29 @@ public class SearchFragmentTabs extends FragmentActivity {
 
             }
         }));
+
+        BottomNavigationView  bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.search_bottom:
+                                startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
+
+                            case R.id.account_bottom:
+                                //   startActivity(new Intent(getBaseContext(), SearchFragmentTabs.class));
+                                overridePendingTransition(0, 0);
+                                break;
+                            case R.id.home_bottom:
+                                startActivity(new Intent(getBaseContext(), HomeActivity.class));
+                                overridePendingTransition(0, 0);
+                                break;
+                        }
+                        return true;
+                    }});
     }
 
     public TabLayout setTags() {
