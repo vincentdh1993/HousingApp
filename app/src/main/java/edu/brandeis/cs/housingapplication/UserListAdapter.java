@@ -38,7 +38,7 @@ public class UserListAdapter extends ArrayAdapter <UserListItem> {
         TextView adddress=(TextView) view.findViewById(R.id.address);
         ImageView img=(ImageView)view.findViewById(R.id.user_profile_img);
         name.setText(user.getName());
-        review.setRating((float)user.getReview());
+        review.setRating((float) 3.5); //get review from db
         adddress.setText("address");
         phone.setText("text");
         img.setImageResource(R.drawable.user);
