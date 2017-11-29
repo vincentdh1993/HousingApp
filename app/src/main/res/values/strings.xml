@@ -58,5 +58,11 @@
     <string name="review_comment">Comment</string>
 
     <string name="cancel_button">Cancel</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <string name="username_hint">Username...</string>
+    <string name="pw_hint">Password...</string>
+    <string name="signup_prompt">Don\'t have an account? Click here to signup!</string>
+    <string name="btn_login">Login</string>
 
 </resources>

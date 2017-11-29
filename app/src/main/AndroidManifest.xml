@@ -1,22 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.brandeis.cs.housingapplication">
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-
         android:allowBackup="true"
-        android:label=""
         android:icon="@drawable/help_logo"
-        android:roundIcon="@drawable/help_logo"
+        android:label=""
         android:logo="@drawable/help_logo"
+        android:roundIcon="@drawable/help_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,18 +27,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".SearchFragmentTabs"
-            android:windowSoftInputMode="adjustNothing"/>
-
-
-        <activity android:name=".PostHouseActivity"></activity>
-
-        <activity android:name=".DisplayHouseActivity"></activity>
-
-        <activity android:name=".RateHouseActivity"></activity>
-
-        <activity android:name=".HomeActivity"></activity>
+        <activity
+            android:name=".SearchFragmentTabs"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".PostHouseActivity" />
+        <activity android:name=".DisplayHouseActivity" />
+        <activity android:name=".RateHouseActivity" />
+        <activity android:name=".HomeActivity" />
+        <activity android:name=".LoginActivity"></activity>
     </application>
 
 </manifest>
