@@ -1,4 +1,4 @@
-package edu.brandeis.cs.housingapplication;
+package edu.brandeis.cs.housingapplication.adapters.listitems;
 
 /**
  * Created by Kevin on 11/23/17.
@@ -19,13 +19,13 @@ public class UserListItem {
     }
 
 
-    protected String getName() {
+    public String getName() {
         return name;
     }
-    protected  String getAddress() {
+    public   String getAddress() {
         return this.address;
     }
-    protected  String getPhone() {
+    public   String getPhone() {
         return this.address;
     }
     public String getImgURL() {
@@ -35,20 +35,20 @@ public class UserListItem {
         this.img=img;
     }
 
-    protected double getReview() {
+    public double getReview() {
         return review;
     }
-    protected String getImage() {
+    public String getImage() {
         return  image;
     }
 
-    protected void setName(String name) {
+    public void setName(String name) {
         this.name=name;
     }
-    protected void setImage(String image) {
+    public void setImage(String image) {
         this.image=image;
     }
-    protected  void setReview(double review) {
+    public   void setReview(double review) {
         this.review=review;
     }
 

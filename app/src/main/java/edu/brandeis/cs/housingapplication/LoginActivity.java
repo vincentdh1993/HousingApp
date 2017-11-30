@@ -22,14 +22,15 @@ public class LoginActivity extends AppCompatActivity {
         this.tvSignup = (TextView) findViewById(R.id.tv_signup_prompt);
         setOnClickListener();
         //TODO: THERE'S NOT MUCH I CAN REALLY DO UNTIL I FIGURE OUT THE ASYNC TASK, SO LETS' MOVE ON
-        //TODO: TO MAKING A SIGNUP SCREEN.
+        //TODO: ONCE A USER RETURNS THEN SAVE UPDATE SQLITE
     }
 
     private void setOnClickListener() {
         tvSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+//                startActivity(new Intent(getApplicationContext(), SignupActivity.class));
+                startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
             }
         });
     }

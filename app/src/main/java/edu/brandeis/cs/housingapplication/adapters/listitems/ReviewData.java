@@ -1,4 +1,4 @@
-package edu.brandeis.cs.housingapplication;
+package edu.brandeis.cs.housingapplication.adapters.listitems;
 
 /**
  * Created by eureyuri on 2017/11/28.

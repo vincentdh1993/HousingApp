@@ -14,6 +14,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Locale;
 
+import edu.brandeis.cs.housingapplication.adapters.AddressListAdapter;
+import edu.brandeis.cs.housingapplication.adapters.listitems.AddressListItem;
+
 /**
  * Created by Kevin on 11/23/17.
  */

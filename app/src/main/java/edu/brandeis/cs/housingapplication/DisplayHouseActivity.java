@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import edu.brandeis.cs.housingapplication.adapters.ReviewAdapter;
+import edu.brandeis.cs.housingapplication.adapters.ViewPagerAdapter;
+import edu.brandeis.cs.housingapplication.adapters.listitems.ReviewData;
+
 /**
  * Created by eureyuri on 2017/11/26.
  */

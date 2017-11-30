@@ -1,4 +1,4 @@
-package edu.brandeis.cs.housingapplication;
+package edu.brandeis.cs.housingapplication.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.squareup.picasso.Picasso;
+
+import edu.brandeis.cs.housingapplication.R;
 
 public class ViewPagerAdapter extends PagerAdapter {
 

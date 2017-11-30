@@ -1,4 +1,4 @@
-package edu.brandeis.cs.housingapplication;
+package edu.brandeis.cs.housingapplication.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,6 +11,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import edu.brandeis.cs.housingapplication.R;
+import edu.brandeis.cs.housingapplication.adapters.listitems.UserListItem;
 
 /**
  * Created by Kevin on 11/23/17.

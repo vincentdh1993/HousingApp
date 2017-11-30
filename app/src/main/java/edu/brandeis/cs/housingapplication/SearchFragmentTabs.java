@@ -10,6 +10,8 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
 import android.view.MenuItem;
 
+import edu.brandeis.cs.housingapplication.adapters.PagerAdapter;
+
 /**
  * Created by Kevin on 11/23/17.
  */
