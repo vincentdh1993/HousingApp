@@ -64,5 +64,8 @@
     <string name="pw_hint">Password...</string>
     <string name="signup_prompt">Don\'t have an account? Click here to signup!</string>
     <string name="btn_login">Login</string>
+    <string name="name_hint">Name</string>
+    <string name="btn_picture">Upload a picture</string>
+    <string name="checkbox_landlord">Are you a landlord?</string>
 
 </resources>

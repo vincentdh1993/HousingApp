@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <EditText
+        android:id="@+id/editText_usernameSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/username_hint"/>
+
+    <EditText
+        android:id="@+id/editText_pwSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/pw_hint"
+        android:layout_below="@+id/editText_usernameSignup"/>
+
+    <EditText
+        android:id="@+id/editText_nameSignup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:hint="@string/name_hint"
+        android:layout_below="@+id/editText_pwSignup"/>
+
+    <CheckBox
+        android:id="@+id/isLandlord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkbox_landlord"
+        android:textSize="18sp"
+        android:layout_below="@id/btn_uploadPic"/>
+
+    <Button
+        android:id="@+id/btn_uploadPic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_picture"
+        android:textSize="18sp"
+        android:layout_margin="16dp"
+        android:layout_below="@id/editText_nameSignup"
+        android:textAllCaps="false"/>
+
+</RelativeLayout>
