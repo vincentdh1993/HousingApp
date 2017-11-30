@@ -3,4 +3,7 @@
     <item android:id="@+id/menu_Search"
         android:title="@string/search"
         android:orderInCategory="1"/>
+    <item android:id="@+id/menu_logout"
+        android:title="@string/logout"
+        android:orderInCategory="2"/>
 </menu>

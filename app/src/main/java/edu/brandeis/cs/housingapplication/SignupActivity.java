@@ -16,7 +16,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
@@ -24,13 +23,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.brandeis.cs.housingapplication.domainmodels.User;
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
-import okio.Buffer;
+import edu.brandeis.cs.housingapplication.login.SessionService;
+import edu.brandeis.cs.housingapplication.utils.NetworkUtils;
 
 public class SignupActivity extends AppCompatActivity {
     private static final Integer UPLOAD_PIC = 1;
@@ -50,6 +44,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         getReferences();
         setButtonClickHandlers();
+        getSupportActionBar().setTitle(R.string.signup);
     }
 
     private void getReferences() {
@@ -76,22 +71,24 @@ public class SignupActivity extends AppCompatActivity {
         this.btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO: BUNDLE UP THE DATA, POST TO BACKEND
                 //TODO: FIGURE OUT WHAT THE FUCK TO DO WITH THE IMAGE PATH
-                Log.d("THE URL", createUrl().toString());
-                new CreateUserTask().execute(createUrl());
+                Log.d("THE URL", NetworkUtils.createUrl("users").toString());
+                new CreateUserTask().execute(NetworkUtils.createUrl("users"));
             }
         });
     }
 
+    //Apparently not making this static creates a memory leak. Does anyone care? No.
     public class CreateUserTask extends AsyncTask<URL, Void, String> {
+
         @Override
         protected String doInBackground(URL... urls) {
+            ObjectMapper mapper = new ObjectMapper();
             URL url = urls[0];
             Log.d("URL IN ASYNCTASK", url.toString());
             String newUser = "";
             try {
-                newUser = doHttp(url);
+                newUser = NetworkUtils.doHttpPost(url, mapper.writeValueAsString(SignupActivity.this.buildUser()));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -100,57 +97,21 @@ public class SignupActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
-            //todo: use this info to update db for current user
-            Log.d("RESULT FROM BACKGROUND", s);
-        }
-
-        private String doHttp(URL url) throws IOException {
+            //Once account has been created, redirect user to login
+            //Ideally we would do some fancy automatic login, but oh well
             ObjectMapper mapper = new ObjectMapper();
-            OkHttpClient client = new OkHttpClient();
-            RequestBody body = null;
+            SessionService sessionService = new SessionService(getApplicationContext());
+            User newUser = null;
             try {
-                body = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),
-                        mapper.writeValueAsString(buildUser()));
-            } catch (JsonProcessingException e) {
-                e.printStackTrace();
-            }
-            Request request = new Request.Builder().url(url).post(body).addHeader("Accept", "application/json")
-                    .addHeader("Content-Type", "application/json")
-                    .build();
-            printBody(request);
-            Log.d("REQUEST", request.toString());
-            Response response = null;
-            try {
-                response = client.newCall(request).execute();
+                newUser = mapper.readValue(s, User.class);
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            return response.body().string();
+            Log.d("DESERIALIZED USER:", newUser.toString());
+            sessionService.addUser(newUser.getUserName());
+            startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         }
 
-        private void printBody(Request request) {
-            try {
-                Request copy = request.newBuilder().build();
-                Buffer buffer = new Buffer();
-                copy.body().writeTo(buffer);
-                Log.d("REQUEST BODY", buffer.readUtf8());
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
-
-
-    private URL createUrl() {
-        Uri uri = Uri.parse("http://10.0.2.2:8080").buildUpon()
-                .appendPath("users").build();
-        try {
-            return new URL(uri.toString());
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        return null; //you're fucked
     }
 
     private User buildUser() {
@@ -160,6 +121,7 @@ public class SignupActivity extends AppCompatActivity {
         boolean isTenant = !this.isLandlord.isChecked();
         return new User(name, userName, password, imgPath, isTenant);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -173,6 +135,9 @@ public class SignupActivity extends AppCompatActivity {
         }
     }
 
+
+    //More of less directly lifted from:
+    //https://stackoverflow.com/questions/2169649/get-pick-an-image-from-androids-built-in-gallery-app-programmatically
     private String getPath(Uri picture) {
         String filePath = "";
         String id = DocumentsContract.getDocumentId(picture).split(":")[1];

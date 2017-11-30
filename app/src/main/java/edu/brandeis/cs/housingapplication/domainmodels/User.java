@@ -1,15 +1,22 @@
 package edu.brandeis.cs.housingapplication.domainmodels;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class User implements Serializable {
     private String name;
     private String userName;
     private String passwordHash;
     private String profilePictureUrl;
     private boolean isTenant;
+    private String userID;
+
+    public User() {
+        //for Jackson
+    }
 
     public User(String name, String userName, String passwordHash, String profilePictureUrl, boolean isTenant) {
         this.name =name;
@@ -35,6 +42,10 @@ public class User implements Serializable {
         return userName;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
     @JsonProperty(value = "isTenant")
     public boolean isTenant() {
         return isTenant;
@@ -58,5 +69,15 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    @Override
+    public String toString() {
+        return "Name: " + name + "\nUsername: " + userName +
+                "\nUser Id: " + userID +  "\nIs tenant: " + isTenant;
     }
 }

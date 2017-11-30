@@ -70,5 +70,7 @@
     <string name="profilePicture">Profile Picture</string>
     <string name="tv_reviewsWritten">Reviews you\'ve written</string>
     <string name="search">Search</string>
+    <string name="signup">Signup</string>
+    <string name="logout">Logout</string>
 
 </resources>
