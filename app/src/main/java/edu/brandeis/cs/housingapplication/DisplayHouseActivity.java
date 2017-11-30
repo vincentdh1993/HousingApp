@@ -23,6 +23,8 @@ import android.widget.TextView;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import org.w3c.dom.Text;
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -77,7 +79,7 @@ public class DisplayHouseActivity extends AppCompatActivity implements LoaderMan
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), RateHouseActivity.class);
                 i.putExtra(getString(R.string.aptExtra), aptJSON);
-                startActivityForResult(i, 1);
+                startActivity(i);
             }
         });
 
@@ -140,38 +142,24 @@ public class DisplayHouseActivity extends AppCompatActivity implements LoaderMan
 
     @Override
     public void onLoadFinished(Loader<String> loader, String data) {
+        Log.d("DATA ONLOADFINISHED", data);
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<List<Rating>> mapType = new TypeReference<List<Rating>>() {};
         List<Rating> results = new ArrayList<>();
+        Log.d("RESULTS ONLOADFIN", results.toString());
         try {
             results = mapper.readValue(data, mapType);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        TextView stars = (TextView) findViewById(R.id.houseRating);
+        stars.setText(getStars(results));
         reviewList.setAdapter(new ReviewAdapter(results));
     }
 
     @Override
     public void onLoaderReset(Loader<String> loader) {
         //do nothing
-    }
-
-    //When the RateHouseActivity comes back, this is what is done with the results
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK){
-                String rating = data.getStringExtra("rating");
-                String comment = data.getStringExtra("comment");
-                ListView listView = (ListView)findViewById(R.id.reviews_list);
-                ReviewAdapter adapter = (ReviewAdapter)listView.getAdapter();
-                adapter.add(new Rating(100, "New review", rating, comment));
-                adapter.notifyDataSetChanged();
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code for a canceled rating
-            }
-        }
     }
 
     //Extracts the data from the incoming intent, deserializes and uses it
@@ -212,7 +200,7 @@ public class DisplayHouseActivity extends AppCompatActivity implements LoaderMan
         if (totalStars == 0) {
             return "Not yet rated (No stars)";
         }
-        double avgStars = Math.ceil(totalStars/ratings.size());
+        double avgStars = Math.ceil((double)totalStars/ratings.size());
         String result = "";
         for (int i = 0; i < avgStars; i++) {
             result += star;

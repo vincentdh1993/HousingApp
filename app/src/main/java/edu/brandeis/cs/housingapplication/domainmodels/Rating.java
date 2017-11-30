@@ -13,14 +13,10 @@ public class Rating {
         //for Jackson
     }
 
-    public Rating(int id, String content, String[] comment) {
-        this.ratingID = id;
+    public Rating(String content, int starCount) {
         this.content = content;
-        this.comments = comments;
+        this.starCount = starCount;
     }
-
-    public Rating(int i, String s1, String s2, String s3) {}
-
 
     public void setContent(String content) {
         this.content = content;

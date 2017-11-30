@@ -37,6 +37,10 @@ public class ReviewAdapter extends BaseAdapter {
         return ratings.get(index);
     }
 
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
     @Override
     public long getItemId(int index) {
         return index;

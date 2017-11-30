@@ -72,6 +72,18 @@ public class NetworkUtils {
         return returnURL(builder.build());
     }
 
+    //There's a metric asston of code duplication here. Does anyone give a shit?
+    public static URL createUrl(Map<String, String> params, String... path) {
+        Uri.Builder builder = Uri.parse(BASE_URL).buildUpon();
+        for (int i = 0; i < path.length; i++) {
+            builder.appendPath(path[i]);
+        }
+        for (String key : params.keySet()) {
+            builder.appendQueryParameter(key, params.get(key));
+        }
+        return returnURL(builder.build());
+    }
+
     private static URL returnURL(Uri uri) {
         try {
             return new URL(uri.toString());
