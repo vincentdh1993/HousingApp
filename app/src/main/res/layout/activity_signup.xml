@@ -16,6 +16,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:hint="@string/pw_hint"
+        android:inputType="textPassword"
         android:layout_below="@+id/editText_usernameSignup"/>
 
     <EditText
@@ -43,5 +44,15 @@
         android:layout_margin="16dp"
         android:layout_below="@id/editText_nameSignup"
         android:textAllCaps="false"/>
+
+    <Button
+        android:id="@+id/btn_signup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:text="Signup"
+        android:textAllCaps="false"
+        android:layout_margin="16dp"
+        android:layout_below="@id/isLandlord"/>
 
 </RelativeLayout>
