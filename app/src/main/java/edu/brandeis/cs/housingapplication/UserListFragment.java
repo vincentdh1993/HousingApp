@@ -38,6 +38,7 @@ public class UserListFragment extends Fragment {
         return rootView;
 
     }
+
     private void populateList() {
         for(int i=0; i<5; i++) {
             stringList.add(new UserListItem("name "+i));
@@ -68,10 +69,11 @@ public class UserListFragment extends Fragment {
             }
         });
     }
+
     public void filter(String charText) {
         Log.e("filter", "filtering");
         charText = charText.toLowerCase(Locale.getDefault());
-        stringList .clear();
+        stringList.clear();
         if (charText.length() == 0) {
             stringList.addAll(copyData);
         } else {

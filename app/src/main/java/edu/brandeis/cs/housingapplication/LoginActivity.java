@@ -96,7 +96,9 @@ public class LoginActivity extends AppCompatActivity {
             sessionService.updateLoggedInUser(currentUser.getUserName(), currentUser.getUserID());
             Log.d("SOMEONE LOGGED IN?", Boolean.toString(sessionService.isSomeoneLoggedIn()));
             Log.d("CURRENT USER", SessionService.CURRENT_USER_ID);
-            startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
+            Intent intent = new Intent(LoginActivity.this, UserProfileActivity.class);
+            intent.putExtra("CURRENT_USER", currentUser.getUserID());
+            startActivity(intent);
         }
     }
 }

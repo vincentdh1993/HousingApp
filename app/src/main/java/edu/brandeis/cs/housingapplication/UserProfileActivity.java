@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -42,12 +43,20 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
     private ListView ratingsAboutMe;
     private SessionService sessionService;
     private List<Rating> ratings;
+    private Button btnRateUser;
+    private String userId; //id of the user whose profile we are showing
 
+    //TODO: WHEN YOU GET HERE FROM A SEARCH YOU NEED TO PASS IN THE ID OF THE USER
+    //TODO: SO WE KNOW WHOSE RATINGS TO PULL. RIGHT NOT IT IS JUST PULLING THE CURRENT_USER
+    //TODO: WHICH IS GREAT BUT NOT QUITE WHAT WE WANT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         this.sessionService = new SessionService(this);
+        this.userId = getIntent().getStringExtra("CURRENT_USER");
+        handleButton();
+
         ratingsIWrote = (ListView)findViewById(R.id.list_reviewsWritten);
         ratingsIWrote.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -57,6 +66,7 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
             }
 
         });
+
         ratingsAboutMe = (ListView) findViewById(R.id.list_reviewsAboutMe);
         ratingsAboutMe.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -65,12 +75,26 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
                 return false;
             }
         });
+
         getRatingsIWrote();
         getRatingsAboutMe();
     }
 
+    private void handleButton() {
+        this.btnRateUser = (Button) findViewById(R.id.btn_rateUser);
+        btnRateUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), RateHouseActivity.class);
+                intent.putExtra("isUser", true);
+                intent.putExtra("USER_ID", userId);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void getRatingsAboutMe() {
-        URL url = NetworkUtils.createUrl("users", SessionService.CURRENT_USER_ID, "ratingsAbout");
+        URL url = NetworkUtils.createUrl("users", userId, "ratingsAbout");
         Bundle queryBundle = new Bundle();
         queryBundle.putString(SEARCH_ABOUTME, url.toString());
         LoaderManager loaderManager = getSupportLoaderManager();
@@ -83,7 +107,7 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
     }
 
     private void getRatingsIWrote() {
-        URL url = NetworkUtils.createUrl("users", SessionService.CURRENT_USER_ID, "ratingsWritten");
+        URL url = NetworkUtils.createUrl("users", userId, "ratingsWritten");
         Log.d("GETRATINGS URL", url.toString());
         Bundle queryBundle = new Bundle();
         queryBundle.putString(SEARCH_QUERY, url.toString());

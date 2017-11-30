@@ -76,5 +76,6 @@
     <string name="squarefeet">Square footage</string>
     <string name="rooms">Number of rooms</string>
     <string name="aptExtra">APARTMENT_EXTRA</string>
+    <string name="rate_user">Rate this user!</string>
 
 </resources>

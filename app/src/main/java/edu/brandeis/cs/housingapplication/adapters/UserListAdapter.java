@@ -21,12 +21,11 @@ import edu.brandeis.cs.housingapplication.adapters.listitems.UserListItem;
 
 public class UserListAdapter extends ArrayAdapter <UserListItem> {
     ArrayAdapter<UserListItem> adapter;
-    List<UserListItem> users=new ArrayList<>();
+    List<UserListItem> users = new ArrayList<>();
 
     public UserListAdapter(Context context, ArrayList<UserListItem> data) {
         super(context,android.R.layout.simple_list_item_1, data);
     }
-
 
 
     @Override
@@ -47,6 +46,4 @@ public class UserListAdapter extends ArrayAdapter <UserListItem> {
         img.setImageResource(R.drawable.user);
         return view;
     }
-
-
 }

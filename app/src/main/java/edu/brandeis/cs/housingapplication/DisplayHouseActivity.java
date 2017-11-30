@@ -79,6 +79,7 @@ public class DisplayHouseActivity extends AppCompatActivity implements LoaderMan
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), RateHouseActivity.class);
                 i.putExtra(getString(R.string.aptExtra), aptJSON);
+                i.putExtra("isUser", false);
                 startActivity(i);
             }
         });

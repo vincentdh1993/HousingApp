@@ -66,7 +66,7 @@ public class ReviewAdapter extends BaseAdapter {
 
 
         RatingBar stars = (RatingBar) view.findViewById(R.id.ratingFeed);
-        stars.setNumStars(reviewData.getStarCount());
+        stars.setRating((float) reviewData.getStarCount());
 
         return view;
     }

@@ -23,6 +23,7 @@ import java.util.Map;
 
 import edu.brandeis.cs.housingapplication.domainmodels.Apartment;
 import edu.brandeis.cs.housingapplication.domainmodels.Rating;
+import edu.brandeis.cs.housingapplication.domainmodels.User;
 import edu.brandeis.cs.housingapplication.login.SessionService;
 import edu.brandeis.cs.housingapplication.utils.NetworkUtils;
 
@@ -30,6 +31,7 @@ import edu.brandeis.cs.housingapplication.utils.NetworkUtils;
  * Created by mbug on 11/27/2017.
  */
 
+//This class is kind of a misnomer, because we use it to rate houses or users
 public class RateHouseActivity extends AppCompatActivity{
 
     private RatingBar ratingBar;
@@ -37,12 +39,19 @@ public class RateHouseActivity extends AppCompatActivity{
     private Button submit;
     private Button cancel;
     private Apartment apartment;
+    private String userId;
+    private boolean isUserRating;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rate_house);
-        this.apartment = getApartment();
+        isUserRating = getIntent().getBooleanExtra("isUser", false);
+        if (!isUserRating) {
+            this.apartment = getApartment();
+        }
+        this.userId = getIntent().getStringExtra("USER_ID");
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.help_logo);
 
@@ -58,8 +67,12 @@ public class RateHouseActivity extends AppCompatActivity{
             public void onClick(View v) {
                 Map<String, String> params = new HashMap<>();
                 params.put("writerId", SessionService.CURRENT_USER_ID);
-                new UploadRating().execute(NetworkUtils.createUrl(params, "apartments", apartment.getApartmentID(),
-                        "ratings"));
+                if (isUserRating) {
+                    new UploadRating().execute(NetworkUtils.createUrl(params, "users", userId, "ratings"));
+                } else {
+                    new UploadRating().execute(NetworkUtils.createUrl(params, "apartments", apartment.getApartmentID(),
+                            "ratings"));
+                }
 
             }
         });

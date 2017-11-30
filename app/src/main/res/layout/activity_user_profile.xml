@@ -14,9 +14,18 @@
         android:layout_height="wrap_content"
         android:contentDescription="@string/profilePicture"
         android:src="@drawable/help_logo"
-        android:layout_alignParentStart="true"/>
+        android:layout_alignParentStart="true"
+        android:layout_below="@id/btn_rateUser"/>
 
-
+    <Button
+        android:id="@+id/btn_rateUser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:textSize="18sp"
+        android:text="@string/rate_user"/>
     <TextView
         android:id="@+id/tv_reviewsWritten"
         android:layout_width="wrap_content"

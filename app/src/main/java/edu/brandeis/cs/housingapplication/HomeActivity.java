@@ -104,6 +104,30 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(new Intent(HomeActivity.this, PostHouseActivity.class));
             }
         });
+        setBottomNavigations();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.profile_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_Search:
+                //we do nothing because we're already on this screen
+                break;
+            case R.id.menu_logout:
+                this.sessionService.logout();
+                startActivity(new Intent(this, LoginActivity.class));
+        }
+        return true;
+    }
+
+    private void setBottomNavigations() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -126,26 +150,5 @@ public class HomeActivity extends AppCompatActivity {
                         }
                         return true;
                     }});
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.profile_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_Search:
-                //we do nothing because we're already on this screen
-                break;
-            case R.id.menu_logout:
-                this.sessionService.logout();
-                startActivity(new Intent(this, LoginActivity.class));
-        }
-        return true;
     }
 }
