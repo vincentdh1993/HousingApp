@@ -56,10 +56,12 @@ public class NetworkUtils {
     }
 
 
-    public static URL createUrl(String path) {
-        Uri uri = Uri.parse(BASE_URL).buildUpon().appendPath(path)
-                .build();
-       return returnURL(uri);
+    public static URL createUrl(String... path) {
+        Uri.Builder builder = Uri.parse(BASE_URL).buildUpon();
+        for (int i = 0; i < path.length; i++) {
+            builder.appendPath(path[i]);
+        }
+        return returnURL(builder.build());
     }
 
     public static URL createUrl(String path, Map<String, String> params) {

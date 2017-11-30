@@ -4,37 +4,37 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import edu.brandeis.cs.housingapplication.R;
-import edu.brandeis.cs.housingapplication.adapters.listitems.ReviewData;
+import edu.brandeis.cs.housingapplication.domainmodels.Rating;
 
 /**
  * Created by eureyuri on 2017/11/28.
  */
 
 public class ReviewAdapter extends BaseAdapter {
-    private ArrayList<ReviewData> reviewDatas;
+    private List<Rating> ratings;
 
-    public ReviewAdapter() {
-        reviewDatas = new ArrayList<ReviewData>();
-        reviewDatas.add(new ReviewData(1, "Eurey", "☆☆☆☆", "Hello"));
-        reviewDatas.add(new ReviewData(2, "Kevin", "☆☆☆", "Hello2"));
-        reviewDatas.add(new ReviewData(3, "Moses", "☆☆", "Hello3"));
-        reviewDatas.add(new ReviewData(4, "Vincent", "☆", "Hello4"));
-        reviewDatas.add(new ReviewData(5, "Daniel", "☆☆☆", "Hello5"));
+    public ReviewAdapter(List<Rating> ratings) {
+        this.ratings = ratings;
     }
+
 
     @Override
     public int getCount() {
-        return reviewDatas.size();
+        return ratings.size();
     }
 
     @Override
     public Object getItem(int index) {
-        return reviewDatas.get(index);
+        return ratings.get(index);
     }
 
     @Override
@@ -42,26 +42,27 @@ public class ReviewAdapter extends BaseAdapter {
         return index;
     }
 
-    public void add(ReviewData review) {
-        reviewDatas.add(review);
+    public void add(Rating review) {
+        ratings.add(review);
     }
 
     @Override
     public View getView(int index, View view, ViewGroup parent) {
-        ReviewData reviewData = reviewDatas.get(index);
+        Rating reviewData = ratings.get(index);
 
         if (view == null) {
             view = LayoutInflater.from(parent.getContext()).inflate(R.layout.review_entry, parent, false);
         }
 
         TextView name = (TextView)view.findViewById(R.id.review_name);
-        name.setText(reviewData.getName());
+        name.setText(Integer.toString(reviewData.getRatingID()));
 
         TextView rating = (TextView)view.findViewById(R.id.review_rate);
-        rating.setText(reviewData.getRating());
+        rating.setText(reviewData.getContent());
 
-        TextView comment = (TextView)view.findViewById(R.id.review_comment);
-        comment.setText(reviewData.getComment());
+
+        RatingBar stars = (RatingBar) view.findViewById(R.id.ratingFeed);
+        stars.setNumStars(reviewData.getStarCount());
 
         return view;
     }

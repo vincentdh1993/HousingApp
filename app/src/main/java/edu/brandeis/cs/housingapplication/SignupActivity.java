@@ -108,7 +108,7 @@ public class SignupActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
             Log.d("DESERIALIZED USER:", newUser.toString());
-            sessionService.addUser(newUser.getUserName());
+            sessionService.addUser(newUser.getUserName(), newUser.getUserID());
             startActivity(new Intent(SignupActivity.this, LoginActivity.class));
         }
 

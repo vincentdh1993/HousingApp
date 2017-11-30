@@ -5,12 +5,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.Toast;
+
+import edu.brandeis.cs.housingapplication.login.SessionService;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -23,13 +27,14 @@ public class HomeActivity extends AppCompatActivity {
     Button search;
     Button post;
     BottomNavigationView bottomNavigationView;
+    private SessionService sessionService;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
+        this.sessionService = new SessionService(this);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.help_logo);
 
@@ -124,5 +129,23 @@ public class HomeActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.profile_menu, menu);
+        return true;
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_Search:
+                //we do nothing because we're already on this screen
+                break;
+            case R.id.menu_logout:
+                this.sessionService.logout();
+                startActivity(new Intent(this, LoginActivity.class));
+        }
+        return true;
+    }
 }

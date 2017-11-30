@@ -85,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             ObjectMapper mapper = new ObjectMapper();
+            Log.d("SERVER RESULT LOGIN", s);
             User currentUser = null;
             try {
                 currentUser = mapper.readValue(s, User.class);
@@ -94,6 +95,7 @@ public class LoginActivity extends AppCompatActivity {
             SessionService sessionService = new SessionService(getApplicationContext());
             sessionService.updateLoggedInUser(currentUser.getUserName(), currentUser.getUserID());
             Log.d("SOMEONE LOGGED IN?", Boolean.toString(sessionService.isSomeoneLoggedIn()));
+            Log.d("CURRENT USER", SessionService.CURRENT_USER_ID);
             startActivity(new Intent(LoginActivity.this, UserProfileActivity.class));
         }
     }

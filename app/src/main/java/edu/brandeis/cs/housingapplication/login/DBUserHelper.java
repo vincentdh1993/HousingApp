@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBUserHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "user_login.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
     public DBUserHelper(Context context) {
         super(context, DATABASE_NAME, null, VERSION);
@@ -22,6 +22,7 @@ public class DBUserHelper extends SQLiteOpenHelper {
                 DBUserContract.DBUserEntry.TABLE_NAME + " ( " +
                 DBUserContract.DBUserEntry._ID + " INTEGER PRIMARY KEY NOT NULL, " +
                 DBUserContract.DBUserEntry.COLUMN_USERNAME + " TEXT NOT NULL, " +
+                DBUserContract.DBUserEntry.COLUMN_USERID + " INTEGER NOT NULL, " +
                 DBUserContract.DBUserEntry.COLUMN_ISLOGGEDIN + " INTEGER NOT NULL )";
         db.execSQL(SQL_CREATE_CURRENT_USER_TABLE);
     }

@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import edu.brandeis.cs.housingapplication.adapters.ReviewAdapter;
 import edu.brandeis.cs.housingapplication.adapters.ViewPagerAdapter;
-import edu.brandeis.cs.housingapplication.adapters.listitems.ReviewData;
+import edu.brandeis.cs.housingapplication.domainmodels.Rating;
 
 /**
  * Created by eureyuri on 2017/11/26.
@@ -66,7 +66,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
         });
 
         ListView reviewList = (ListView)findViewById(R.id.reviews_list);
-        reviewList.setAdapter(new ReviewAdapter());
+        reviewList.setAdapter(new ReviewAdapter(null));
 //        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
@@ -102,7 +102,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
                 String comment = data.getStringExtra("comment");
                 ListView listView = (ListView)findViewById(R.id.reviews_list);
                 ReviewAdapter adapter = (ReviewAdapter)listView.getAdapter();
-                adapter.add(new ReviewData(100, "New review", rating, comment));
+                adapter.add(new Rating(100, "New review", rating, comment));
                 adapter.notifyDataSetChanged();
             }
             if (resultCode == Activity.RESULT_CANCELED) {
