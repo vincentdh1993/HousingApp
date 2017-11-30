@@ -1,6 +1,7 @@
 package edu.brandeis.cs.housingapplication;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.AsyncTaskLoader;
@@ -32,10 +33,13 @@ import edu.brandeis.cs.housingapplication.utils.NetworkUtils;
 
 
 public class UserProfileActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
-    private static final int RATINGS_RESULTS_LOADER = 1;
-    private static final String SEARCH_QUERY = "query";
+    private static final int RATINGS_WRITTEN_RESULTS_LOADER = 1;
+    private static final int RATINGS_ABOUTME_RESULTS_LOADER = 2;
+    private static final String SEARCH_QUERY = "query_ratings_written";
+    private static final String SEARCH_ABOUTME = "query_aboutMe";
 
-    private ListView myRatings;
+    private ListView ratingsIWrote;
+    private ListView ratingsAboutMe;
     private SessionService sessionService;
     private List<Rating> ratings;
 
@@ -44,8 +48,8 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_profile);
         this.sessionService = new SessionService(this);
-        myRatings = (ListView)findViewById(R.id.list_reviewsWritten);
-        myRatings.setOnTouchListener(new View.OnTouchListener() {
+        ratingsIWrote = (ListView)findViewById(R.id.list_reviewsWritten);
+        ratingsIWrote.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 v.getParent().requestDisallowInterceptTouchEvent(true);
@@ -53,21 +57,43 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
             }
 
         });
-        getRatings();
+        ratingsAboutMe = (ListView) findViewById(R.id.list_reviewsAboutMe);
+        ratingsAboutMe.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        });
+        getRatingsIWrote();
+        getRatingsAboutMe();
     }
 
-    private void getRatings() {
+    private void getRatingsAboutMe() {
+        URL url = NetworkUtils.createUrl("users", SessionService.CURRENT_USER_ID, "ratingsAbout");
+        Bundle queryBundle = new Bundle();
+        queryBundle.putString(SEARCH_ABOUTME, url.toString());
+        LoaderManager loaderManager = getSupportLoaderManager();
+        Loader<String> ratingsAboutMeLoader = loaderManager.getLoader(RATINGS_ABOUTME_RESULTS_LOADER);
+        if (ratingsAboutMeLoader == null) {
+            loaderManager.initLoader(RATINGS_ABOUTME_RESULTS_LOADER, queryBundle, this);
+        } else {
+            loaderManager.initLoader(RATINGS_ABOUTME_RESULTS_LOADER, queryBundle, this);
+        }
+    }
+
+    private void getRatingsIWrote() {
         URL url = NetworkUtils.createUrl("users", SessionService.CURRENT_USER_ID, "ratingsWritten");
         Log.d("GETRATINGS URL", url.toString());
         Bundle queryBundle = new Bundle();
         queryBundle.putString(SEARCH_QUERY, url.toString());
         LoaderManager loaderManager = getSupportLoaderManager();
-        Loader<String> ratingsLoader = loaderManager.getLoader(RATINGS_RESULTS_LOADER);
+        Loader<String> ratingsLoader = loaderManager.getLoader(RATINGS_WRITTEN_RESULTS_LOADER);
         if (ratingsLoader == null) {
             //this is what kicks off the loading process
-            loaderManager.initLoader(RATINGS_RESULTS_LOADER, queryBundle, this);
+            loaderManager.initLoader(RATINGS_WRITTEN_RESULTS_LOADER, queryBundle, this);
         } else {
-            loaderManager.restartLoader(RATINGS_RESULTS_LOADER, queryBundle, this);
+            loaderManager.restartLoader(RATINGS_WRITTEN_RESULTS_LOADER, queryBundle, this);
         }
 
     }
@@ -75,7 +101,41 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
     @SuppressLint("StaticFieldLeak")
     @Override
     public Loader<String> onCreateLoader(int id, final Bundle args) {
-        return new AsyncTaskLoader<String>(this) {
+       switch (id) {
+           case RATINGS_WRITTEN_RESULTS_LOADER:
+               return loadRatingsIWrote(this, args);
+           case RATINGS_ABOUTME_RESULTS_LOADER:
+               return loadRatingsAboutMe(this, args);
+       }
+       return null; //you're in deep shit if you get here
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private AsyncTaskLoader<String> loadRatingsAboutMe(Context context, final Bundle args) {
+        return new AsyncTaskLoader<String>(context) {
+            @Override
+            public String loadInBackground() {
+                String theUrl = args.getString(SEARCH_ABOUTME);
+                try {
+                    URL getAboutMe = new URL(theUrl);
+                    String results = NetworkUtils.doHttpGet(getAboutMe);
+                    return results;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+
+            @Override
+            protected void onStartLoading() {
+                forceLoad();
+            }
+        };
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private AsyncTaskLoader<String> loadRatingsIWrote(Context context, final Bundle args) {
+        return new AsyncTaskLoader<String>(context) {
             @Override
             public String loadInBackground() {
                 String getRatingString = args.getString(SEARCH_QUERY);
@@ -106,9 +166,14 @@ public class UserProfileActivity extends AppCompatActivity implements LoaderMana
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.ratings = results;
-        this.myRatings.setAdapter(new ReviewAdapter(ratings));
-        setListViewHeightBasedOnChildren(myRatings);
+        if (loader.getId() == RATINGS_WRITTEN_RESULTS_LOADER) {
+            this.ratings = results;
+            this.ratingsIWrote.setAdapter(new ReviewAdapter(ratings));
+            setListViewHeightBasedOnChildren(ratingsIWrote);
+        } else if (loader.getId() == RATINGS_ABOUTME_RESULTS_LOADER) {
+            this.ratingsAboutMe.setAdapter(new ReviewAdapter(results));
+            setListViewHeightBasedOnChildren(this.ratingsAboutMe);
+        }
     }
 
     @Override

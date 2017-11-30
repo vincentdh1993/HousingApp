@@ -69,8 +69,12 @@
     <string name="checkbox_landlord">Are you a landlord?</string>
     <string name="profilePicture">Profile Picture</string>
     <string name="tv_reviewsWritten">Reviews you\'ve written</string>
+    <string name="tv_reviewsAboutYou">Reviews others have written about you</string>
     <string name="search">Search</string>
     <string name="signup">Signup</string>
     <string name="logout">Logout</string>
+    <string name="squarefeet">Square footage</string>
+    <string name="rooms">Number of rooms</string>
+    <string name="aptExtra">APARTMENT_EXTRA</string>
 
 </resources>

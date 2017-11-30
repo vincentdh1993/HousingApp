@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+<RelativeLayout
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp"
+
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
         <TextView
             android:id="@+id/address_label"
@@ -78,16 +79,54 @@
             android:ems="10"
             android:inputType="numberDecimal" />
 
+        <TextView
+            android:id="@+id/squareFeet_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="33dp"
+            android:textSize="24sp"
+            android:text="@string/squarefeet"
+            android:layout_below="@+id/price_text"
+            android:layout_alignStart="@id/description_text"/>
+
+        <EditText
+            android:id="@+id/squareFeet_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@id/squareFeet_label"
+            android:layout_below="@id/squareFeet_label"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:inputType="number"/>
+
+        <TextView
+            android:id="@+id/roomCount_label"
+            android:layout_marginTop="33dp"
+            android:textSize="24sp"
+            android:text="@string/rooms"
+            android:layout_below="@id/squareFeet_text"
+            android:layout_alignStart="@id/description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/roomCount_text"
+            android:layout_alignStart="@id/roomCount_label"
+            android:layout_below="@id/roomCount_label"
+            android:layout_marginTop="17dp"
+            android:ems="10"
+            android:inputType="number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
         <Button
             android:id="@+id/submitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/price_text"
-            android:layout_below="@+id/price_text"
+            android:layout_below="@+id/roomCount_text"
+            android:layout_alignStart="@id/roomCount_label"
             android:layout_marginTop="30dp"
             android:text="@string/submit_label" />
-        <include layout="@layout/bottom_navigation"/>
 
         <Button
             android:id="@+id/cancel_button"
@@ -98,9 +137,6 @@
             android:layout_marginStart="13dp"
             android:layout_toEndOf="@+id/submitButton"
             android:text="@string/cancel_button" />
-
+        <include layout="@layout/bottom_navigation"/>
     </RelativeLayout>
-    <include layout="@layout/bottom_navigation"/>
-
-
-</android.support.constraint.ConstraintLayout>
+</ScrollView>
