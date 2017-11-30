@@ -1,32 +1,55 @@
 package edu.brandeis.cs.housingapplication;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.LoaderManager;
+import android.content.AsyncTaskLoader;
+import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+
 import edu.brandeis.cs.housingapplication.adapters.ReviewAdapter;
 import edu.brandeis.cs.housingapplication.adapters.ViewPagerAdapter;
+import edu.brandeis.cs.housingapplication.domainmodels.Apartment;
 import edu.brandeis.cs.housingapplication.domainmodels.Rating;
+import edu.brandeis.cs.housingapplication.utils.NetworkUtils;
 
 /**
  * Created by eureyuri on 2017/11/26.
  */
 
-public class DisplayHouseActivity extends AppCompatActivity {
+public class DisplayHouseActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<String> {
+    private static final int APT_RATINGS = 1;
+    private static final String APT_RATINGS_QUERY = "ratings_query";
 
     ViewPager viewPager;
     ViewPagerAdapter adapter;
     BottomNavigationView bottomNavigationView;
+    ListView reviewList;
+
+    //TODO: NEED TO MAKE SURE THAT RATE ACTIVITY ALSO SENDS BACK APARTMENT JSON
+    private Apartment apartment; //since this is an activity to dispaly one apt, makes sense to have a member field
+    private String aptJSON;
 
     private String[] images = {
             "https://static.pexels.com/photos/186077/pexels-photo-186077.jpeg",
@@ -37,6 +60,9 @@ public class DisplayHouseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_house);
+        this.apartment = getApartment();
+        this.aptJSON = getIntent().getStringExtra(getString(R.string.aptExtra));
+        Log.d("APARTMENT JSON:", aptJSON); //so ratings is coming back null, naturally
 
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setIcon(R.drawable.help_logo);
@@ -50,6 +76,7 @@ public class DisplayHouseActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(), RateHouseActivity.class);
+                i.putExtra(getString(R.string.aptExtra), aptJSON);
                 startActivityForResult(i, 1);
             }
         });
@@ -65,10 +92,144 @@ public class DisplayHouseActivity extends AppCompatActivity {
             }
         });
 
-        ListView reviewList = (ListView)findViewById(R.id.reviews_list);
-        reviewList.setAdapter(new ReviewAdapter(null));
-//        reviewList.setAdapter(new ReviewAdapter(DB, getApplicationContext()));
+        reviewList = (ListView) findViewById(R.id.reviews_list);
+        getAptRatings();
+        setBottomNavigations();
+    }
 
+    private void getAptRatings() {
+        URL url = NetworkUtils.createUrl("apartments", apartment.getApartmentID(), "ratings");
+        Bundle queryBundle = new Bundle();
+        queryBundle.putString(APT_RATINGS_QUERY, url.toString());
+        LoaderManager loaderManager = getLoaderManager();
+        Loader<String> ratingsLoader = loaderManager.getLoader(APT_RATINGS);
+        if (ratingsLoader == null) {
+            loaderManager.initLoader(APT_RATINGS, queryBundle, this);
+        } else {
+            loaderManager.restartLoader(APT_RATINGS, queryBundle, this);
+        }
+    }
+
+    @Override
+    public Loader<String> onCreateLoader(int id, Bundle args) {
+        return loadingAptRatings(this, args);
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    private AsyncTaskLoader<String> loadingAptRatings(Context context, final Bundle args) {
+        return new AsyncTaskLoader<String>(context) {
+            @Override
+            public String loadInBackground() {
+                String theURL = args.getString(APT_RATINGS_QUERY);
+                try {
+                    URL ratingsUrl = new URL(theURL);
+                    String results = NetworkUtils.doHttpGet(ratingsUrl);
+                    return  results;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null; //you're in the shit
+            }
+
+            @Override
+            protected void onStartLoading() {
+                forceLoad();
+            }
+        };
+    }
+
+    @Override
+    public void onLoadFinished(Loader<String> loader, String data) {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<List<Rating>> mapType = new TypeReference<List<Rating>>() {};
+        List<Rating> results = new ArrayList<>();
+        try {
+            results = mapper.readValue(data, mapType);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        reviewList.setAdapter(new ReviewAdapter(results));
+    }
+
+    @Override
+    public void onLoaderReset(Loader<String> loader) {
+        //do nothing
+    }
+
+    //When the RateHouseActivity comes back, this is what is done with the results
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK){
+                String rating = data.getStringExtra("rating");
+                String comment = data.getStringExtra("comment");
+                ListView listView = (ListView)findViewById(R.id.reviews_list);
+                ReviewAdapter adapter = (ReviewAdapter)listView.getAdapter();
+                adapter.add(new Rating(100, "New review", rating, comment));
+                adapter.notifyDataSetChanged();
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code for a canceled rating
+            }
+        }
+    }
+
+    //Extracts the data from the incoming intent, deserializes and uses it
+    //to populate some textviews
+    private void extractAndSet() {
+        TextView houseName = (TextView)findViewById(R.id.houseName);
+        houseName.setText(apartment.getAddress());
+
+        TextView rating = (TextView)findViewById(R.id.houseRating);
+        rating.setText(getStars(apartment.getRatings()));
+
+        TextView address = (TextView)findViewById(R.id.description_display_text);
+        address.setText("Description: " + apartment.getDescription());
+    }
+
+    private Apartment getApartment() {
+        ObjectMapper mapper = new ObjectMapper();
+        Intent intent = getIntent();
+        String json = intent.getStringExtra(getString(R.string.aptExtra));
+        Apartment apartment = new Apartment();
+        try {
+            apartment = mapper.readValue(json, Apartment.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (apartment.getRatings() == null) {
+            apartment.setRatings(new ArrayList<Rating>());
+        }
+        return apartment;
+    }
+
+    private String getStars(List<Rating> ratings) {
+        String star = "☆";
+        int totalStars = 0;
+        for (Rating r : ratings) {
+            totalStars += r.getStarCount();
+        }
+        if (totalStars == 0) {
+            return "Not yet rated (No stars)";
+        }
+        double avgStars = Math.ceil(totalStars/ratings.size());
+        String result = "";
+        for (int i = 0; i < avgStars; i++) {
+            result += star;
+        }
+        return result;
+    }
+
+    private void startSlideShow() {
+        //Ok so this I don't really need to touch, because it is just dealing
+        //with images and we're not fucking wit images rn
+        viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
+        adapter = new ViewPagerAdapter(DisplayHouseActivity.this, images);
+        viewPager.setAdapter(adapter);
+
+    }
+
+    private void setBottomNavigations() {
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -91,47 +252,6 @@ public class DisplayHouseActivity extends AppCompatActivity {
                         }
                         return true;
                     }});
-
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == 1) {
-            if (resultCode == Activity.RESULT_OK){
-                String rating = data.getStringExtra("rating");
-                String comment = data.getStringExtra("comment");
-                ListView listView = (ListView)findViewById(R.id.reviews_list);
-                ReviewAdapter adapter = (ReviewAdapter)listView.getAdapter();
-                adapter.add(new Rating(100, "New review", rating, comment));
-                adapter.notifyDataSetChanged();
-            }
-            if (resultCode == Activity.RESULT_CANCELED) {
-                //Write your code for a canceled rating
-            }
-        }
-    }
-
-//    TODO: extract info from db and set
-    private void extractAndSet() {
-//        Get house name from db
-        TextView houseName = (TextView)findViewById(R.id.houseName);
-        houseName.setText("New house name");
-
-//        Get rating from db
-        TextView rating = (TextView)findViewById(R.id.houseRating);
-        rating.setText("☆☆☆");
-
-//        Get address from db
-        TextView address = (TextView)findViewById(R.id.address_display_text);
-        address.setText("1234");
-
-    }
-
-    private void startSlideShow() {
-        //        Get pictures from db
-        viewPager = (ViewPager)findViewById(R.id.slideshowViewPager);
-        adapter = new ViewPagerAdapter(DisplayHouseActivity.this, images);
-        viewPager.setAdapter(adapter);
 
     }
 }
